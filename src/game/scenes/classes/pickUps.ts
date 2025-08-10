@@ -37,12 +37,11 @@ export class Locator {
                 player.RB.translation().x,
                 player.RB.translation().y
             );
-            const arrow = this.scene.add.rectangle(
+            const arrow = this.scene.add.sprite(
                 player.RB.translation().x,
                 player.RB.translation().y,
-                20,
-                4,
-                0xfff000
+                "pickups",
+                3
             );
             arrow.rotation = angle;
         }
