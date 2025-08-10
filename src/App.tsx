@@ -57,7 +57,7 @@ function App() {
             abi: Daimond_Miner_ABI,
             address: contract_address,
             functionName: "CreateLobby",
-            args: [id, parseEther("20"), parseUnits("2", 1)],
+            args: [id, parseEther("20"), parseUnits("2", 0)],
         });
     }
     function claim_Reward(id: string) {
