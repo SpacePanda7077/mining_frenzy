@@ -32,10 +32,10 @@ export class Locator {
     detinate(diamonds: Daimond[], player: Player) {
         if (diamonds.length > 0) {
             const angle = Phaser.Math.Angle.Between(
-                diamonds[0].RB.translation().x,
-                diamonds[0].RB.translation().y,
                 player.RB.translation().x,
-                player.RB.translation().y
+                player.RB.translation().y,
+                diamonds[0].RB.translation().x,
+                diamonds[0].RB.translation().y
             );
             const arrow = this.scene.add.sprite(
                 player.RB.translation().x,
