@@ -16,6 +16,7 @@ import { erc20Abi, parseEther, parseUnits } from "viem";
 import GetTokenAddress from "./components/getToken";
 import GetDMNToken from "./components/getDMNToken";
 import "./App.css";
+import GetNftAmount from "./components/getNFT";
 
 function App() {
     const { address } = useAccount();
@@ -41,6 +42,8 @@ function App() {
     const [claimEmmited, setClaimEmmited] = useState(false);
     const [dmnToken, setDmnToken] = useState("");
     const [lobbyId, setLobbyId] = useState("");
+    const [nftAmount, setNFTAmount] = useState(0);
+
     EventBus.on("enterGame", (id: string) => {
         console.log("enter");
         setLobbyId(id);
@@ -101,6 +104,7 @@ function App() {
             <div className="getDMNBtn">
                 <GetTokenAddress onTokenChange={setDmnToken}></GetTokenAddress>
                 <GetDMNToken></GetDMNToken>
+                <GetNftAmount onBalanceChange={setNFTAmount}></GetNftAmount>
             </div>
         </div>
     );
