@@ -22,19 +22,16 @@ function App() {
     const { address } = useAccount();
     console.log(address);
 
-    const {
-        data: hash,
-        isPending,
-        error,
-        isSuccess,
-        writeContract,
-    } = useWriteContract();
+    const { writeContract: writeApprove, data: approvehash } =
+        useWriteContract();
+    const { writeContract: writeCreateLobby, data: createLobbyhash } =
+        useWriteContract();
+    const { writeContract: writeClaim, data: claimhash } = useWriteContract();
 
-    const {
-        data: receipt,
-        isPending: isComfirming,
-        isSuccess: isComfirmed,
-    } = useWaitForTransactionReceipt({ hash });
+    const { data: approvereceipt, isSuccess: ApproveComfirmed } =
+        useWaitForTransactionReceipt({ hash: approvehash });
+    const { data: CreateLobbyreceipt, isSuccess: CreateLobbyComfirmed } =
+        useWaitForTransactionReceipt({ hash: createLobbyhash });
 
     //  References to the PhaserGame component (game and scene are exposed)
     const phaserRef = useRef<IRefPhaserGame | null>(null);
@@ -54,21 +51,15 @@ function App() {
         setClaimEmmited(true);
     });
     function joinGame(id: string) {
-        writeContract({
+        writeApprove({
             abi: erc20Abi,
             address: dmnToken as `0x${string}`,
             functionName: "approve",
             args: [contract_address, parseEther("21")],
         });
-        writeContract({
-            abi: Daimond_Miner_ABI,
-            address: contract_address,
-            functionName: "CreateLobby",
-            args: [id, parseEther("20"), parseUnits("2", 0)],
-        });
     }
     function claim_Reward(id: string) {
-        writeContract({
+        writeClaim({
             abi: Daimond_Miner_ABI,
             address: contract_address,
             functionName: "ClaimLobbyReward",
@@ -92,11 +83,20 @@ function App() {
     }, [claimEmmited]);
 
     useEffect(() => {
-        if (isComfirmed) {
-            console.log(receipt);
+        if (ApproveComfirmed) {
+            writeCreateLobby({
+                abi: Daimond_Miner_ABI,
+                address: contract_address,
+                functionName: "CreateLobby",
+                args: [lobbyId, parseEther("20"), parseUnits("2", 0)],
+            });
+        }
+    }, [ApproveComfirmed]);
+    useEffect(() => {
+        if (CreateLobbyComfirmed) {
             EventBus.emit("lobbyComfirmed");
         }
-    }, [isComfirmed]);
+    }, [CreateLobbyComfirmed]);
 
     return (
         <div id="app">
