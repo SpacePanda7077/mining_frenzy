@@ -12,6 +12,8 @@ export class Menu extends Scene {
     leaderBoardBtn: Phaser.GameObjects.Image;
     marketBtntext: Phaser.GameObjects.Text;
     marketBtn: Phaser.GameObjects.Image;
+    mintNewNFTButton: Phaser.GameObjects.Image;
+    mintNewNFTContainer: Phaser.GameObjects.Container;
     constructor() {
         super("Menu");
     }
@@ -35,9 +37,33 @@ export class Menu extends Scene {
         this.load.audio("mining", "sound/mining.mp3");
     }
     create() {
+        const uri =
+            "https://plum-total-louse-876.mypinata.cloud/ipfs/bafkreiedkprwlic2bhm2u74ctj76lp46ruvremvmmtkcxjyblbq4lcbicq";
         this.width = Number(this.game.config.width);
         this.height = Number(this.game.config.height);
         this.add.sprite(this.width / 2, this.height / 2, "bg");
+        this.mintNewNFTContainer = this.add.container(
+            this.width / 2,
+            this.height / 2
+        );
+        this.mintNewNFTButton = this.add
+            .image(0, 0, "button")
+            .setScale(5, 2)
+            .setInteractive()
+            .on("pointerdown", () => {
+                EventBus.emit("mint", uri);
+            });
+
+        const mintNewNFTText = this.add
+            .text(0, 0, "Mint first Nft")
+            .setDepth(2)
+            .setOrigin(0.5)
+            .setColor("black");
+
+        this.mintNewNFTContainer
+            .add([this.mintNewNFTButton, mintNewNFTText])
+            .setActive(false)
+            .setVisible(false);
 
         this.MenuContainer = this.add.container(
             this.width / 2,
@@ -127,6 +153,12 @@ export class Menu extends Scene {
         EventBus.emit("current-scene-ready", this);
         EventBus.once("lobbyComfirmed", () => {
             this.scene.start("Initialize");
+        });
+        EventBus.once("no_Nft", () => {
+            try {
+                this.mintNewNFTContainer.setActive(true).setVisible(true);
+                this.MenuContainer.setActive(false).setVisible(false);
+            } catch (err) {}
         });
     }
 }

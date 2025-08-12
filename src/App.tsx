@@ -13,6 +13,9 @@ import {
 } from "wagmi";
 import { EventBus } from "./game/EventBus";
 import { erc20Abi, parseEther, parseUnits } from "viem";
+import GetTokenAddress from "./components/getToken";
+import GetDMNToken from "./components/getDMNToken";
+import "./App.css";
 
 function App() {
     const { address } = useAccount();
@@ -36,6 +39,7 @@ function App() {
     const phaserRef = useRef<IRefPhaserGame | null>(null);
     const [hasEmmited, setHasEmmited] = useState(false);
     const [claimEmmited, setClaimEmmited] = useState(false);
+    const [dmnToken, setDmnToken] = useState("");
     const [lobbyId, setLobbyId] = useState("");
     EventBus.on("enterGame", (id: string) => {
         console.log("enter");
@@ -49,7 +53,7 @@ function App() {
     function joinGame(id: string) {
         writeContract({
             abi: erc20Abi,
-            address: tokenAddress,
+            address: dmnToken as `0x${string}`,
             functionName: "approve",
             args: [contract_address, parseEther("21")],
         });
@@ -94,7 +98,10 @@ function App() {
     return (
         <div id="app">
             <PhaserGame ref={phaserRef} />
-            <div></div>
+            <div className="getDMNBtn">
+                <GetTokenAddress onTokenChange={setDmnToken}></GetTokenAddress>
+                <GetDMNToken></GetDMNToken>
+            </div>
         </div>
     );
 }
