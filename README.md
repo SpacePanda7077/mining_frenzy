@@ -1,58 +1,56 @@
-# 💎 Diamond Miner
-### *A Web3-Powered Phaser + React Game on Somnia Testnet*
+# Diamond Miner (Honeycomb Protocol Edition)
+
+A Web3-enhanced 2D mining game built with Phaser and React — powered by the **Honeycomb Protocol** on Solana for streamlined on-chain gameplay.
 
 ---
 
-## 🎯 Overview
-Diamond Miner is a **blockchain-enabled 2D game** where players explore mines, collect diamonds, and interact with **on-chain assets**.  
-Built with **Phaser 3** for immersive gameplay and **React** for smooth UI, the game integrates **Web3 features** using the **Somnia Testnet** — enabling provable in-game ownership and blockchain-driven mechanics.
+## 🚀 Overview
+
+Diamond Miner combines classic mining mechanics with blockchain interaction. Unearth treasures and record your progress using **Honeycomb Protocol**, which provides:
+
+-   Streamlined Web3 integration
+-   Efficient on-chain state compression
+-   Rich game-focused APIs for Solana-based games
 
 ---
 
-## 🚀 Key Features
-- ⚡ **Modern Tech Stack** — Phaser 3.90.0 + React 19.0.0 + Vite 6.3.1 + TypeScript 5.7.2.
-- 🔄 **Hot Reload Development** — Instant feedback during development.
-- 🌐 **Web3 Integration** — Connect wallets, verify ownership, and record game events on **Somnia Testnet**.
-- 🔌 **React ↔ Phaser Bridge** — EventBus system for UI-to-game communication.
-- 📦 **Production Ready** — Optimized builds with `npm run build`.
-- 🪶 **Lightweight Boilerplate** — Minimal setup; just start coding gameplay.
+## ✨ Core Features
+
+-   **Game & UI**: Phaser 3 game engine embedded in a React app.
+-   **Honeycomb Integration**:
+    -   Resource tracking (e.g., mined diamonds)
+    -   Character & asset management
+    -   Mission systems and on-chain rewards
+-   **Optimized Web3**: Honeycomb’s compression architecture drastically reduces on-chain storage costs.
+-   **Modular Design**: Easy to expand with leaderboards, NFTs, crafting systems, and more.
 
 ---
 
-## 🕹️ Gameplay Flow
-1. **Connect Wallet** — Players link their Somnia Testnet wallet to the game.
-2. **Mine Diamonds** — Navigate the mine, avoid hazards, and collect gems.
-3. **On-Chain Records** — Diamond scores, achievements, or in-game NFTs can be recorded on Somnia Testnet.
-4. **Leaderboards & Rewards** — Players compete for top rankings and on-chain rewards.
+## 🛠 Tech Stack
 
----
-
-## 🔗 Web3 & Somnia Testnet
-- **Wallet Support** — Interacts with Somnia-compatible wallets.
-- **Testnet Transactions** — Game actions can trigger blockchain events.
-- **Ownership Proof** — Players can verify their in-game achievements via the blockchain.
-- **Future NFT Integration** — Potential to mint collected diamonds or special items as NFTs.
-
----
-
-## 🛠️ Tech Stack
-- **Frontend Framework**: React
-- **Game Engine**: Phaser 3
-- **Blockchain**: Somnia Testnet
-- **Bundler/Dev Server**: Vite
-- **Language**: TypeScript
-- **Styling**: CSS Modules
+-   **Frontend**: React
+-   **Game Engine**: Phaser 3
+-   **Blockchain Layer**: Solana via Honeycomb Protocol SDK
+-   **Build Tools**: Vite & TypeScript
+-   **Styling**: CSS Modules
+-   **Honeycomb Modules**: Edge Toolkit, Resource Manager, Missions, Character Manager
 
 ---
 
 ## 📂 Project Structure
+
 src/
-├─ main.tsx # React entry point
-├─ PhaserGame.tsx # Initializes Phaser within React
-├─ game/ # Game scenes and logic
-├─ game/scenes/ # Individual Phaser scenes
-└─ EventBus.ts # Event bridge between React & Phaser
-public/assets/ # Game assets (images, audio, etc.)
+├── main.tsx # React entry point
+├── PhaserGame.tsx # Phaser embedded in React
+├── honeycomb/
+│ ├── edge.ts # Edge Toolkit initialization
+│ ├── resources.ts # Resource Manager integration
+│ ├── missions.ts # Mission system logic
+│ └── characters.ts # Character Manager logic
+├── game/ # Phaser scenes and game logic
+└── EventBus.ts # React ↔ Phaser communication bridge
+
+public/assets/ # Static game assets (images, audio, etc.)
 
 yaml
 Copy
@@ -60,33 +58,54 @@ Edit
 
 ---
 
-## ⚡ Getting Started
-```bash
-# Clone the repo
-git clone https://github.com/SpacePanda7077/Daimond_Miner.git
-cd Daimond_Miner
+## 🖥 Getting Started
 
-# Install dependencies
-npm install
+1. **Clone the repo & install dependencies:**
+    ```bash
+    git clone https://github.com/your-username/diamond-miner.git
+    cd diamond-miner
+    npm install
+    Configure Honeycomb Protocol
+    Obtain your Honeycomb API key and set environment variables in a .env file:
+    ```
 
-# Start development mode
+env
+Copy
+Edit
+HONEYCOMB_API_KEY=your_api_key_here
+HONEYCOMB_NETWORK=devnet
+Run in development mode:
+
+bash
+Copy
+Edit
 npm run dev
+Build for production:
 
-# Build for production
+bash
+Copy
+Edit
 npm run build
-🎯 Future Roadmap
-⛏️ Procedural Mine Generation — Infinite mining worlds.
+🐝 Honeycomb Protocol Highlights
+Edge Toolkit: Simplifies Solana smart contract interactions.
 
-🤝 Multiplayer — Real-time mining competitions.
+Resource Manager: Handles in-game asset creation, mining, crafting.
 
-🏆 Blockchain Leaderboards — On-chain player rankings.
+Character Manager: Mint or manage characters, NFTs, and player profiles.
 
-🎵 Immersive Sound Design — Thematic music & SFX.
+Missions & Staking: Create missions, reward players, and build engagement with on-chain tracking.
 
-🎨 Polished Art Assets — Rich visuals to enhance the mining theme.
+Compression Layer: Efficient on-chain data storage, reducing costs and improving performance.
 
-🪙 NFT Rewards — Mint diamonds as collectible NFTs.
+📚 Docs: https://docs.honeycombprotocol.com
 
-📜 License
-MIT License — free to use, modify, and share.
+🔮 Future Roadmap
+⛏️ Procedural Mine Generation – Endless mine maps
 
+🏆 On-Chain Leaderboards – Transparent score tracking
+
+💎 NFT Rewards – Mint diamonds or tools as NFTs
+
+🤝 Multiplayer – Shared mines and PvP mining
+
+🎯 Expanded Missions – Complex goals with rewards
