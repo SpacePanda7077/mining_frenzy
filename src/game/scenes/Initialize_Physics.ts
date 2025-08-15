@@ -4,8 +4,13 @@ import RAPIER from "@dimforge/rapier2d-compat";
 
 export class Initialize extends Scene {
     world: RAPIER.World;
+    url: any;
     constructor() {
         super("Initialize");
+    }
+    init(url: any) {
+        console.log(url);
+        this.url = url.url;
     }
     preload() {}
     async create() {
@@ -25,7 +30,7 @@ export class Initialize extends Scene {
         if (!this.registry.has("RAPIER")) {
             this.registry.set("RAPIER", RAPIER);
         }
-        this.scene.start("Game");
+        this.scene.start("Game", { url: this.url });
     }
 }
 

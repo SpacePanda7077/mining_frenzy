@@ -1,5 +1,6 @@
 import { Game as MainGame } from "./scenes/Game";
 import { Initialize } from "./scenes/Initialize_Physics";
+import { Setup } from "./scenes/Setup";
 import { UI as GameUI } from "./scenes/Ui";
 import { Menu as GameMenu } from "./scenes/Menu";
 import { AUTO, Game, Types } from "phaser";
@@ -12,7 +13,7 @@ const config: Types.Core.GameConfig = {
     height: 960,
     parent: "game-container",
     backgroundColor: "#028af8",
-    scene: [GameMenu, Initialize, MainGame, GameUI],
+    scene: [Setup, GameMenu, Initialize, MainGame, GameUI],
     pixelArt: true,
 };
 

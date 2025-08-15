@@ -12,7 +12,7 @@ export class Player {
     tileSize: number;
     world: RAPIER.World;
     scene: Phaser.Scene;
-    body: Phaser.GameObjects.Rectangle;
+    body: Phaser.GameObjects.Sprite;
     RB: RAPIER.RigidBody;
     collider: RAPIER.Collider;
     velocity: Phaser.Math.Vector2;
@@ -31,7 +31,8 @@ export class Player {
         scene: Phaser.Scene,
         world: RAPIER.World,
         x: number,
-        y: number
+        y: number,
+        texture: string
     ) {
         this.tileSize = 32;
         this.scene = scene;
@@ -48,7 +49,7 @@ export class Player {
         this.collectedPickup = [];
         this.collectedDaimonds = 0;
         this.activePickup = null;
-        this.body = scene.add.rectangle(x, y, 16, 16, 0x00ff00);
+        this.body = scene.add.sprite(x, y, texture);
 
         const rbDesc = RAPIER.RigidBodyDesc.dynamic()
             .setTranslation(x, y)

@@ -5,3 +5,42 @@
     top: 3%;
 }
 
+.consumable {
+    position: absolute;
+    top: 5%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: rgba(29, 27, 27, 0.603);
+    border-radius: 10px;
+}
+
+.consumables {
+    display: flex;
+    flex-direction: row;
+    gap: 100px;
+}
+.toolsCont {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: rgba(29, 27, 27, 0.603);
+    border-radius: 10px;
+    width: auto;
+    height: auto;
+}
+.tools {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(100px, 1fr));
+    gap: 1rem; /* space between items */
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+
+.connectButton {
+    position: absolute;
+    top: 5%;
+    left: 5%;
+}
+

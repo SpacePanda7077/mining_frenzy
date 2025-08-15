@@ -72,8 +72,11 @@ export class Menu extends Scene {
 
         this.marketBtn = this.add
             .image(-100, -50, "button")
-
-            .setScale(3, 2);
+            .setScale(3, 2)
+            .setInteractive()
+            .on("pointerdown", () => {
+                EventBus.emit("openshop");
+            });
         this.marketBtntext = this.add
             .text(-100, -50, "Shop")
             .setDepth(2)
@@ -81,11 +84,14 @@ export class Menu extends Scene {
             .setColor("black");
         this.leaderBoardBtn = this.add
             .image(100, -50, "button")
-
-            .setScale(4, 2);
+            .setScale(4, 2)
+            .setInteractive()
+            .on("pointerdown", () => {
+                EventBus.emit("openInventory");
+            });
 
         this.leaderBoardBtntext = this.add
-            .text(100, -50, "leaderBoard")
+            .text(100, -50, "inventory")
             .setDepth(2)
             .setOrigin(0.5)
             .setColor("black");
@@ -95,9 +101,7 @@ export class Menu extends Scene {
             .setScale(5, 2)
             .setInteractive()
             .on("pointerdown", () => {
-                //this.scene.start("Initialize");
-                const id = uniqid();
-                EventBus.emit("enterGame", id);
+                EventBus.emit("startGame");
             });
 
         this.playBtntext = this.add
@@ -151,13 +155,13 @@ export class Menu extends Scene {
         });
 
         EventBus.emit("current-scene-ready", this);
+        EventBus.emit("setKey", this.scene.key);
         EventBus.once("lobbyComfirmed", () => {
             this.scene.start("Initialize");
         });
-        EventBus.once("no_Nft", () => {
+        EventBus.once("start", (url: string) => {
             try {
-                this.mintNewNFTContainer.setActive(true).setVisible(true);
-                this.MenuContainer.setActive(false).setVisible(false);
+                this.scene.start("Initialize", { url });
             } catch (err) {}
         });
     }

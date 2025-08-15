@@ -21,15 +21,20 @@ export class Game extends Scene {
     bg: Phaser.GameObjects.TileSprite;
     pickUps: (SpreadBomb | DrillBomb | diamond | Locator)[];
     diamonds: Daimond[];
+    url: string;
     constructor() {
         super("Game");
     }
-    init(world: RAPIER.World) {
+    init(url: { url: string }) {
         //this.world = world;
+        this.url =
+            "https://plum-total-louse-876.mypinata.cloud/ipfs/bafybeifkha56e4udq4m7n3l2hybz4ubfrkmlrpi7mgxas2ppmpmy52gqqa/common_john.png";
+        console.log(url.url);
     }
 
     preload() {
         this.load.setPath("assets");
+        this.load.image("player", this.url);
     }
 
     async create() {
@@ -67,11 +72,12 @@ export class Game extends Scene {
             console.log(err);
         }
 
-        this.player = new Player(this, this.world, 200, -50);
+        this.player = new Player(this, this.world, 200, -50, "player");
         this.cameras.main.startFollow(this.player.body);
         this.cameras.main.roundPixels = true;
 
         EventBus.emit("current-scene-ready", this);
+        EventBus.emit("setKey", this.scene.key);
     }
     update(time: number, delta: number): void {
         if (this.world) {
