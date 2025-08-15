@@ -14,6 +14,20 @@ Diamond Miner combines classic mining mechanics with blockchain interaction. Une
 
 ---
 
+## Instructions
+
+-   clone Repo
+-   run "npm install" to install all dependencies
+-   run "npm run dev" to run the game
+-   go thourgh the setuo page
+-   press play to enter the game
+
+## How to play
+
+-   press WASD to move and Dig
+-   find valueable items while digging before the timer runs out(it uses mission for every cave you mine)
+-   when this the mining is over you can mint found resources and use it to upgrade your character or tools for digging
+
 ## ✨ Core Features
 
 -   **Game & UI**: Phaser 3 game engine embedded in a React app.
