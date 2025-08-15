@@ -1,4 +1,4 @@
-# Diamond Miner (Honeycomb Protocol Edition)
+# Mininig Frenzy
 
 A Web3-enhanced 2D mining game built with Phaser and React — powered by the **Honeycomb Protocol** on Solana for streamlined on-chain gameplay.
 
