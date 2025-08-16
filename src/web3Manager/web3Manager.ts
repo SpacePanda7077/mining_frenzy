@@ -9,6 +9,7 @@ export var modelAddress: string = "";
 export var treeAddress: string = "";
 export var merkleTreeAddress: string = "";
 export var missionPoolAddress: string = "";
+export var missionAddress: string = "";
 export var resourceAddress: string = "";
 
 export const admin = "2UUeuwCYChuXvxqsuSK1EE9N1xdB2Nv2tXhwW7dYhsXm";
@@ -33,5 +34,8 @@ export function setMissionPoolAddress(address: string) {
 }
 export function setResourceAddress(address: string) {
     resourceAddress = address;
+}
+export function setMissionAddress(address: string) {
+    missionAddress = address;
 }
 

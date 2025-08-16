@@ -3,6 +3,7 @@ import {
     CreateCreateCharacterModelTransactionDocument,
     MintAsKind,
     ResourceStorageEnum,
+    RewardKind,
 } from "@honeycomb-protocol/edge-client";
 import {
     client,
@@ -16,6 +17,8 @@ import {
     setMissionPoolAddress,
     setResourceAddress,
     resourceAddress,
+    missionPoolAddress,
+    setMissionAddress,
 } from "../web3Manager/web3Manager";
 import { useWallet, WalletContextState } from "@solana/wallet-adapter-react";
 import { EventBus } from "../game/EventBus";
@@ -198,7 +201,46 @@ function CreateSetup() {
             wallet,
             c.createAssembleCharacterTransaction
         );
+        console.log(modelAddress);
         EventBus.emit("Menu");
+    }
+
+    async function createMission() {
+        const {
+            createCreateMissionTransaction: {
+                missionAddress, // The address of the mission
+                tx, // The transaction response, you'll need to sign and send this transaction
+            },
+        } = await client.createCreateMissionTransaction({
+            data: {
+                authority: admin,
+                cost: {
+                    address: resourceAddress,
+                    amount: "100",
+                },
+                duration: "180",
+                minXp: "0",
+                missionPool: missionPoolAddress,
+                name: "easy cave",
+                payer: wallet.publicKey?.toBase58().toString() as string,
+                project: projectAddress,
+                rewards: [
+                    {
+                        kind: RewardKind.Xp,
+                        max: "100",
+                        min: "100",
+                    },
+                    {
+                        kind: RewardKind.Resource,
+                        max: "500",
+                        min: "250",
+                        resource: resourceAddress.toString(),
+                    },
+                ],
+            },
+        });
+        const txs = sendClientTransactions(client, wallet, tx);
+        setMissionAddress(missionAddress);
     }
 
     return (
@@ -222,7 +264,7 @@ function CreateSetup() {
                 <button onClick={createCharcterTree}>
                     create character Tree
                 </button>
-                <button onClick={createMissionPool}>create Mission</button>
+
                 <button
                     onClick={() => {
                         createResource(wallet);
@@ -244,6 +286,8 @@ function CreateSetup() {
                 >
                     mint resource
                 </button>
+                <button onClick={createMissionPool}>create Mission pool</button>
+                <button onClick={createMission}>create Mission</button>
                 <button onClick={mintCharacter}>mint character</button>
             </div>
         </>

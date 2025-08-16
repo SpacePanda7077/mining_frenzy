@@ -6,6 +6,8 @@ import {
     missionPoolAddress,
     admin,
     resourceAddress,
+    missionAddress,
+    modelAddress,
 } from "./web3Manager/web3Manager";
 import {
     ConnectionProvider,
@@ -55,7 +57,7 @@ function App() {
     useEffect(() => {
         const enterGame = async () => {
             if (hasEmmited) {
-                await enterMission(wallet);
+                //await enterMission();
                 EventBus.emit("start", character);
                 setHasEmmited(false);
             }
@@ -63,6 +65,20 @@ function App() {
 
         enterGame();
     }, [hasEmmited]);
+    async function enterMission() {
+        console.log(modelAddress);
+        const {
+            createSendCharactersOnMissionTransaction: txResponse, // This is the transaction response, you'll need to sign and send this transaction
+        } = await client.createSendCharactersOnMissionTransaction({
+            data: {
+                mission: missionAddress.toString(),
+                characterAddresses: [modelAddress],
+                authority: admin,
+            },
+        });
+        const tx = await sendClientTransactions(client, wallet, txResponse);
+        console.log(tx);
+    }
 
     const wallets = useMemo(
         () => [
@@ -72,6 +88,7 @@ function App() {
         ],
         [network]
     );
+
     //  References to the PhaserGame component (game and scene are exposed)
     const phaserRef = useRef<IRefPhaserGame | null>(null);
 
@@ -101,41 +118,4 @@ function App() {
 }
 
 export default App;
-
-async function enterMission(wallet: WalletContextState) {
-    const {
-        createCreateMissionTransaction: {
-            missionAddress, // The address of the mission
-            tx, // The transaction response, you'll need to sign and send this transaction
-        },
-    } = await client.createCreateMissionTransaction({
-        data: {
-            name: "Test mission",
-            project: projectAddress.toString(),
-            cost: {
-                address: resourceAddress,
-                amount: "100",
-            },
-            duration: "86400", // 1 day
-            minXp: "0", // Minimum XP required to participate in the mission
-            rewards: [
-                {
-                    kind: RewardKind.Xp,
-                    max: "100",
-                    min: "100",
-                },
-                {
-                    kind: RewardKind.Resource,
-                    max: "500",
-                    min: "250",
-                    resource: resourceAddress.toString(),
-                },
-            ],
-            missionPool: missionPoolAddress.toString(),
-            authority: admin.toString(),
-            payer: admin,
-        },
-    });
-    const txs = sendClientTransactions(client, wallet, tx);
-}
 
