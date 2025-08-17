@@ -29,12 +29,12 @@ Diamond Miner combines classic mining mechanics with blockchain interaction. Une
 -   when this the mining is over you can mint found resources and use it to upgrade your character or tools for digging
 
 ## How it works 
--Character : honey comb protocol help by using character as the main player of the game,each character has it secial dungeon they can mine(common_character- common-dungeon ... etc)
--Resources : There are two types of resources in the game (Tools and consumables)
+- Character : honey comb protocol help by using character as the main player of the game,each character has it secial dungeon they can mine(common_character- common-dungeon ... etc)
+- Resources : There are two types of resources in the game (Tools and consumables)
  - Tools: this are tool you use for for digging and they are of different rarities.
  - Consumables: these are resources that you get while mining such as coal, jade, gold, diamonds
--Reciepe : the reciepe is used for crafting new tools
--Mission: is used in game to enter a dungeon which last 3 mins and to replenish the characters oxygen (idle-reward)
+- Reciepe : the reciepe is used for crafting new tools
+- Mission: is used in game to enter a dungeon which last 3 mins and to replenish the characters oxygen (idle-reward)
 
 
 ## ✨ Core Features
@@ -132,4 +132,5 @@ Compression Layer: Efficient on-chain data storage, reducing costs and improving
 🤝 Multiplayer – Shared mines and PvP mining
 
 🎯 Expanded Missions – Complex goals with rewards
+
 
